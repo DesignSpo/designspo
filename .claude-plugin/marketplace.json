@@ -1,0 +1,12 @@
+{
+  "name": "designspo",
+  "description": "Practical web design lessons from DesignSpo for AI agents",
+  "owner": { "name": "DesignSpo" },
+  "plugins": [
+    {
+      "name": "designspo",
+      "source": "./",
+      "description": "Practical web design lessons your agent applies when designing, building or reviewing UI"
+    }
+  ]
+}

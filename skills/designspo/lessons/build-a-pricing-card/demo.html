@@ -1,0 +1,698 @@
+<!doctype html>
+<html lang="en" data-state="before">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Build a pricing card – DesignSpo lesson demo</title>
+<style>
+/* tokens:start */
+/* DesignSpo design tokens.
+   Copied from the CSS variables on designspo.co (Bricks) on 2026-11-01, using the same names.
+   The live site is the source of truth: if you change a value in Bricks, change it here too,
+   then run `npm run sync` to copy it into every template and lesson demo. */
+
+:root {
+  /* Brand */
+  --brand-50: #E7EDFE;
+  --brand-100: #CAD6FC;
+  --brand-200: #95AEF9;
+  --brand-300: #6489F7;
+  --brand-400: #2F60F4;
+  --brand-500: #0C41DF;
+  --brand-600: #0A34B3;
+  --brand-700: #072788;
+  --brand-800: #051957;
+  --brand-900: #020D2C;
+  --brand-950: #010718;
+
+  /* Neutrals */
+  --neutral-50: #F8FAFC;
+  --neutral-100: #F1F5F9;
+  --neutral-200: #E2E8F0;
+  --neutral-300: #CAD5E2;
+  --neutral-400: #90A1B9;
+  --neutral-500: #62748E;
+  --neutral-600: #45556C;
+  --neutral-700: #314158;
+  --neutral-800: #1D293D;
+  --neutral-900: #0F172B;
+  --neutral-950: #020618;
+
+  /* Feedback */
+  --color-error: oklch(63.7% 0.237 25.331);
+  --color-success: oklch(72.3% 0.219 149.579);
+  --color-highlight: oklch(90.5% 0.182 98.111);
+
+  /* Backgrounds */
+  --bg-canvas: var(--neutral-50);
+  --bg-subtle: var(--neutral-200);
+  --bg-surface: var(--neutral-100);
+  --bg-surface_hover: var(--neutral-200);
+  --bg-brand: var(--brand-500);
+  --bg-brand_hover: var(--brand-700);
+  --bg-inverse: var(--neutral-950);
+
+  /* Text */
+  --text-primary: var(--neutral-900);
+  --text-secondary: var(--neutral-600);
+  --text-muted: var(--neutral-400);
+  --text-brand: var(--brand-500);
+  --text-on-brand: var(--neutral-50);
+  --text-inverse-primary: var(--neutral-50);
+  --text-inverse-secondary: var(--neutral-200);
+
+  /* Borders and focus */
+  --border-subtle: var(--neutral-200);
+  --border-default: var(--neutral-300);
+  --border-brand: var(--brand-500);
+  --outline-focus: var(--brand-300);
+
+  /* Font families */
+  --font-heading: "Bricolage Grotesque", system-ui, Arial, sans-serif;
+  --font-body: Inter, system-ui, -apple-system, "Segoe UI", Roboto, Arial, sans-serif;
+
+  /* Text sizes (the site's clamp() values currently resolve to these fixed sizes) */
+  --text-xs: 0.81rem;
+  --text-s: 0.88rem;
+  --text-m: 1rem;
+  --text-l: 1.13rem;
+  --text-xl: 1.25rem;
+  --text-2xl: 1.5rem;
+
+  /* Heading sizes */
+  --heading-2xs: 0.88rem;
+  --heading-xs: 1rem;
+  --heading-s: 1.25rem;
+  --heading-m: 2rem;
+  --heading-l: 2.5rem;
+  --heading-xl: 3rem;
+  --heading-2xl: 3.5rem;
+  --heading-3xl: 4rem;
+
+  /* Radius */
+  --radius-none: 0px;
+  --radius-xs: 4px;
+  --radius-s: 8px;
+  --radius-m: 12px;
+  --radius-l: 16px;
+  --radius-xl: 24px;
+  --radius-full: 1000px;
+
+  /* Spacing (4px grid) */
+  --space-1: 0.06rem;
+  --space-2: 0.13rem;
+  --space-4: 0.25rem;
+  --space-8: 0.5rem;
+  --space-12: 0.75rem;
+  --space-16: 1rem;
+  --space-20: 1.25rem;
+  --space-24: 1.5rem;
+  --space-28: 1.75rem;
+  --space-32: 2rem;
+  --space-36: 2.25rem;
+  --space-40: 2.5rem;
+  --space-44: 2.75rem;
+  --space-48: 3rem;
+  --space-52: 3.25rem;
+  --space-56: 3.5rem;
+  --space-60: 3.75rem;
+  --space-64: 4rem;
+  --space-68: 4.25rem;
+  --space-72: 4.5rem;
+  --space-76: 4.75rem;
+  --space-80: 5rem;
+  --space-84: 5.25rem;
+  --space-88: 5.5rem;
+  --space-92: 5.75rem;
+  --space-96: 6rem;
+  --space-100: 6.25rem;
+
+  /* Motion for demos (not on the site yet). State changes: 300ms, easing in and out. */
+  --duration-fast: 150ms;
+  --duration-base: 300ms;
+  --ease-standard: cubic-bezier(0.45, 0, 0.55, 1);
+
+  /* Proposed for demos: one small shadow */
+  --shadow-s: 0 1px 2px rgb(15 23 43 / 0.08), 0 1px 3px rgb(15 23 43 / 0.06);
+}
+
+/* Fonts are self-hosted on designspo.co. Inside the lesson iframe they load same-origin.
+   The exporter and the preview server swap these URLs for the copies in design-system/fonts/. */
+@font-face {
+  font-family: "Inter";
+  font-style: normal;
+  font-weight: 100 900;
+  font-display: swap;
+  src: url("https://designspo.co/wp-content/uploads/2026/09/inter-100-normal-1ab1ad-1.woff2") format("woff2");
+}
+
+@font-face {
+  font-family: "Bricolage Grotesque";
+  font-style: normal;
+  font-weight: 200 800;
+  font-display: swap;
+  src: url("https://designspo.co/wp-content/uploads/2026/09/bricolage-grotesque-200-normal-2064f7-1.woff2") format("woff2");
+}
+/* tokens:end */
+
+/* frame:start */
+/* Demo frame: the 16:9 canvas, the bottom bar (state, chips, buttons), side-by-side panels, smooth
+   state changes and the export hooks. Shared by every lesson. The bar is optional: leave it out when
+   the lesson needs no Toggle. Edit here, then run `npm run sync`. */
+
+*, *::before, *::after { box-sizing: border-box; }
+
+:root {
+  color-scheme: light;
+  -webkit-text-size-adjust: 100%;
+}
+
+html, body { margin: 0; }
+
+html.ds-embedded { overflow: hidden; }
+
+body {
+  background: transparent;
+  color: var(--text-primary);
+  font-family: var(--font-body);
+  -webkit-font-smoothing: antialiased;
+}
+
+.ds-demo { width: 100%; }
+
+/* Canvas: the part that gets exported. 16:9, and taller only when the content needs it (phones).
+   Lessons can set --canvas-bg, --canvas-ratio and --content-width on .ds-canvas. */
+.ds-canvas {
+  display: grid;
+  grid-template-rows: 1fr auto;
+  aspect-ratio: var(--canvas-ratio, 16 / 9);
+  margin: 0;
+  background: var(--canvas-bg, var(--bg-surface));
+  border: 1px solid var(--border-default);
+  border-radius: var(--radius-xs);
+  container-type: inline-size;
+}
+
+/* Stage: holds the lesson content in one centred column */
+.ds-stage {
+  display: grid;
+  grid-template-columns: minmax(0, var(--content-width, 30rem));
+  justify-content: center;
+  align-content: center;
+  padding: clamp(var(--space-16), 5%, var(--space-40)) clamp(var(--space-16), 6%, var(--space-48)) var(--space-16);
+}
+
+/* Without the bar, the stage gets the same space at the bottom as at the top */
+.ds-canvas:not(:has(> .ds-bar)) > .ds-stage { padding-bottom: clamp(var(--space-16), 5%, var(--space-40)); }
+
+/* Side by side: each version in its own labelled panel, with no bar or Toggle. For state lessons,
+   like No hover next to Hover. Lessons can set --panels for three or more. Panels stack on narrow
+   canvases. */
+.ds-compare {
+  display: grid;
+  grid-template-columns: repeat(var(--panels, 2), minmax(0, 1fr));
+  gap: var(--space-24) clamp(var(--space-24), 7cqi, var(--space-64));
+  align-items: start;
+}
+
+.ds-panel {
+  display: grid;
+  align-content: start;
+  gap: var(--space-12);
+  margin: 0;
+}
+
+.ds-panel-label {
+  justify-self: center;
+  color: var(--text-primary);
+  font: 500 var(--text-s) / 1.4 var(--font-body);
+}
+
+@container (max-width: 30rem) {
+  .ds-compare { grid-template-columns: minmax(0, 1fr); }
+}
+
+/* Bar along the bottom: current state on the left, buttons (or a hover hint) on the right, optional
+   spec chips between. On narrow canvases the chips move up a row so the corners stay put. */
+.ds-bar {
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr) auto;
+  grid-template-areas: "state specs actions";
+  align-items: center;
+  gap: var(--space-8) var(--space-12);
+  padding: 0 var(--space-12) var(--space-12) var(--space-16);
+}
+
+@container (max-width: 30rem) {
+  .ds-bar {
+    grid-template-columns: minmax(0, 1fr) auto;
+    grid-template-areas: "specs specs" "state actions";
+  }
+
+  .ds-bar:not(:has(.ds-specs)) { grid-template-areas: "state actions"; }
+}
+
+.ds-state {
+  grid-area: state;
+  color: var(--text-primary);
+  font: 500 var(--text-s) / 1.4 var(--font-body);
+}
+
+/* Spec chips: optional exact values for the current state, e.g. hex codes */
+.ds-specs {
+  grid-area: specs;
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-8);
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.ds-spec {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-8);
+  padding: var(--space-2) var(--space-8);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-xs);
+  background: rgb(255 255 255 / 0.7);
+  color: var(--neutral-700);
+  font: 500 var(--text-xs) / 1.4 var(--font-body);
+  font-variant-numeric: tabular-nums;
+}
+
+.ds-swatch {
+  width: 0.9em;
+  height: 0.9em;
+  border: 1px solid rgb(15 23 43 / 0.2);
+  border-radius: 2px;
+}
+
+.ds-actions {
+  grid-area: actions;
+  justify-self: end;
+  display: flex;
+  align-items: center;
+  gap: var(--space-8);
+}
+
+/* Toggle, Replay, Show transition... */
+.ds-button {
+  padding: var(--space-4) var(--space-12);
+  border: 1px solid var(--border-default);
+  border-radius: var(--radius-full);
+  background: var(--neutral-50);
+  color: var(--text-primary);
+  font: 500 var(--text-s) / 1.4 var(--font-body);
+  white-space: nowrap;
+  cursor: pointer;
+  -webkit-tap-highlight-color: transparent;
+  transition: background-color var(--duration-fast) var(--ease-standard), border-color var(--duration-fast) var(--ease-standard);
+}
+
+@media (hover: hover) {
+  .ds-button:hover {
+    background: #FFFFFF;
+    border-color: var(--neutral-400);
+  }
+}
+
+.ds-button:focus-visible,
+[data-hover-target]:focus-visible {
+  outline: 2px solid var(--outline-focus);
+  outline-offset: 2px;
+}
+
+/* For hover lessons: tells the reader what to hover, where the buttons would be */
+.ds-hint {
+  color: var(--text-secondary);
+  font: 500 var(--text-s) / 1.4 var(--font-body);
+}
+
+/* Show an element in one state only: data-show="before" or data-show="after" */
+html[data-state="before"] [data-show="after"],
+html[data-state="after"] [data-show="before"] { display: none !important; }
+
+/* Smooth state changes: the runtime wraps each switch in a view transition (crossfade, and a glide
+   for [data-morph] elements), 300ms, easing in and out */
+::view-transition-group(*),
+::view-transition-old(*),
+::view-transition-new(*) {
+  animation-duration: var(--duration-base);
+  animation-timing-function: var(--ease-standard);
+}
+
+/* The bar isn't part of the lesson, so its label and chips switch at once instead of overlapping */
+.ds-bar { view-transition-name: ds-bar; }
+::view-transition-old(ds-bar) { display: none; }
+::view-transition-new(ds-bar),
+::view-transition-group(ds-bar) { animation: none; }
+
+/* Export hooks. The exporter adds .is-capturing (stills) or .is-recording (video) to <html>; the
+   runtime adds .ds-instant while it switches state without a transition. */
+html.is-capturing *, html.is-capturing *::before, html.is-capturing *::after,
+html.ds-instant *, html.ds-instant *::before, html.ds-instant *::after {
+  transition: none !important;
+  animation: none !important;
+}
+
+html:is(.is-capturing, .is-recording) [data-export-hide] { display: none !important; }
+
+/* Exports are flat rectangles, so Kit's image border and radius can frame them */
+html:is(.is-capturing, .is-recording) [data-capture] {
+  border-style: none;
+  border-radius: 0;
+}
+
+/* Exports have no real mouse, so the exporter adds this cursor and puts it where a reader would point:
+   on the hover target of the state it's showing, or on an element marked data-cursor (every state) or
+   data-cursor="before" (that state only). In videos it glides from one to the next. Move it off any
+   text with --cursor-x and --cursor-y (percentages) on that element. */
+.ds-cursor {
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 10;
+  width: 1.5rem;
+  height: 1.875rem;
+  background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 20 25'%3E%3Cpath d='M2 1.5v18.2l4.7-4.4 3.2 7.3 3.1-1.4-3.1-7.1h6.4z' fill='%23020618' stroke='%23fff' stroke-width='1.6' stroke-linejoin='round'/%3E%3C/svg%3E") no-repeat top left / contain;
+  pointer-events: none;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    transition-duration: 0.01ms !important;
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+  }
+}
+/* frame:end */
+
+/* ---------- Lesson styles ---------- */
+/* Two pricing cards. Before: the plan name is the biggest text, the price sits under the features at
+   body size, and the Pro list is longer, in a different order and a different style. After: plan name,
+   then the price as the largest text with /month small beside it, then three features in the same
+   order and style on both cards, with the button at the bottom. The price glides to its new place. */
+.ds-canvas { --content-width: 28rem; }
+
+.plans {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: clamp(var(--space-8), 2.4cqi, var(--space-16));
+}
+
+.plan {
+  display: flex;
+  flex-direction: column;
+  min-height: clamp(14rem, 41.5cqi, 17.5rem);
+  padding: clamp(var(--space-12), 3cqi, var(--space-20));
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-m);
+  background: #FFFFFF;
+  color: var(--text-primary);
+  font-size: clamp(0.6875rem, 2.1cqi, 0.875rem);
+}
+
+.plan__name { order: 1; }
+.plan__features { order: 2; }
+.plan__price { order: 3; }
+.plan__cta { order: 4; }
+
+html[data-state="after"] .plan__price { order: 2; }
+html[data-state="after"] .plan__features { order: 3; }
+
+/* The prices (data-morph) glide up while each card's feature list glides down past them. Pro's two
+   lists share a name, which works because only one of them is shown at a time. */
+.plan:nth-child(1) .plan__features { view-transition-name: basic-features; }
+.plan:nth-child(2) .plan__features { view-transition-name: pro-features; }
+
+.plan__name {
+  margin: 0;
+  color: var(--brand-600);
+  font: 600 clamp(1.125rem, 3.8cqi, 1.5rem) / 1.2 var(--font-heading);
+  letter-spacing: -0.01em;
+}
+
+.plan__features {
+  display: grid;
+  gap: clamp(var(--space-4), 1cqi, var(--space-8));
+  margin: clamp(var(--space-8), 2.2cqi, var(--space-16)) 0 0;
+  padding: 0;
+  list-style: none;
+  font-weight: 500;
+  line-height: 1.35;
+}
+
+.plan__features li {
+  display: flex;
+  align-items: baseline;
+  gap: 0.5em;
+}
+
+.checks li::before {
+  content: "";
+  flex: none;
+  align-self: center;
+  width: 1em;
+  height: 1em;
+  background: var(--brand-500);
+  -webkit-mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3E%3Cpath d='M3.5 8.5l3 3 6-7' fill='none' stroke='%23000' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E") center / contain no-repeat;
+  mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3E%3Cpath d='M3.5 8.5l3 3 6-7' fill='none' stroke='%23000' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E") center / contain no-repeat;
+}
+
+.bullets li::before {
+  content: "";
+  flex: none;
+  align-self: center;
+  width: 0.4em;
+  height: 0.4em;
+  margin-inline: 0.3em;
+  border-radius: var(--radius-full);
+  background: var(--text-primary);
+}
+
+.plan__price {
+  margin: clamp(var(--space-8), 2.2cqi, var(--space-16)) 0 0;
+  font-weight: 600;
+  line-height: 1.35;
+  white-space: nowrap;
+}
+
+/* The button stays at the bottom, with at least this much space above it */
+.plan__cta {
+  margin-top: auto;
+  padding-top: clamp(var(--space-12), 3cqi, var(--space-20));
+}
+
+.plan__button {
+  display: block;
+  padding: clamp(var(--space-8), 1.6cqi, var(--space-12));
+  border-radius: var(--radius-xs);
+  background: var(--bg-brand);
+  color: var(--text-on-brand);
+  font-weight: 600;
+  line-height: 1.2;
+  text-align: center;
+  white-space: nowrap;
+}
+
+/* After: name, then the price as the largest text, then what's included */
+html[data-state="after"] .plan__name {
+  color: var(--text-primary);
+  font-size: clamp(0.875rem, 2.6cqi, 1.125rem);
+}
+
+html[data-state="after"] .plan__price { margin-top: clamp(var(--space-2), 0.6cqi, var(--space-4)); }
+
+html[data-state="after"] .plan__amount {
+  font: 600 clamp(1.75rem, 6.8cqi, 2.75rem) / 1.1 var(--font-heading);
+  letter-spacing: -0.02em;
+}
+
+html[data-state="after"] .plan__period {
+  color: var(--text-secondary);
+  font-weight: 400;
+}
+
+html[data-state="after"] .plan__features {
+  color: var(--text-secondary);
+  font-weight: 400;
+}
+</style>
+</head>
+<body>
+<div class="ds-demo" data-demo>
+<figure class="ds-canvas" data-capture>
+    <div class="ds-stage" role="img" aria-label="Two pricing cards, Basic at $19 and Pro at $49 a month. Before: the plan name is the biggest text, the price sits below the features at the same size as them, and the Pro features are longer, in a different order and with bullets instead of checkmarks. After: each card shows the plan name, then the price as the largest text with /month small beside it, then three checked features in the same order on both cards, with the button at the bottom.">
+      <div class="plans">
+        <div class="plan">
+          <h3 class="plan__name">Basic</h3>
+          <p class="plan__price" data-morph><span class="plan__amount">$19</span><span class="plan__period" data-show="before"> per month</span><span class="plan__period" data-show="after">/month</span></p>
+          <ul class="plan__features checks"><li>3 projects</li><li>10 pages</li><li>Email support</li></ul>
+          <div class="plan__cta"><span class="plan__button">Choose Basic</span></div>
+        </div>
+        <div class="plan">
+          <h3 class="plan__name">Pro</h3>
+          <p class="plan__price" data-morph><span class="plan__amount">$49</span><span class="plan__period" data-show="before"> per month</span><span class="plan__period" data-show="after">/month</span></p>
+          <ul class="plan__features bullets" data-show="before"><li>Unlimited pages</li><li>Custom domain</li><li>10 projects</li><li>Priority email support</li></ul>
+          <ul class="plan__features checks" data-show="after"><li>10 projects</li><li>Unlimited pages</li><li>Priority support</li></ul>
+          <div class="plan__cta"><span class="plan__button">Choose Pro</span></div>
+        </div>
+      </div>
+    </div>
+
+    <figcaption class="ds-bar" data-cover-hide>
+      <span class="ds-state" data-state-label>Before</span>
+      <div class="ds-actions" data-export-hide>
+        <button class="ds-button" type="button" data-toggle aria-pressed="false" aria-label="Toggle the after version">Toggle</button>
+      </div>
+    </figcaption>
+  </figure>
+</div>
+
+<script type="application/json" id="lesson-export">
+{
+  "mode": "two-frame",
+  "states": [
+    "before",
+    "after"
+  ],
+  "frameOrder": [
+    "after",
+    "before"
+  ],
+  "frameDurationMs": 1500
+}
+</script>
+<script>
+/* runtime:start */
+/* Lesson runtime: switches between states with a smooth transition, exposes window.lesson for the
+   exporter, and reports the iframe height. Shared by every lesson. Edit here, then run `npm run sync`.
+
+   Controls, wired up automatically when present:
+     [data-toggle]        click switches to the next state
+     [data-play]          click replays the lesson's own animation (restarts html.ds-playing)
+     [data-hover-target]  hovering or keyboard-focusing it shows the last state, or the state it names
+                          (data-hover-target="focus"); a tap toggles on touch screens
+   Elements with [data-morph] glide to their new size and position instead of crossfading. */
+(() => {
+  const root = document.documentElement;
+
+  const readConfig = () => {
+    const el = document.getElementById('lesson-export');
+    if (!el) return {};
+    try {
+      return JSON.parse(el.textContent);
+    } catch (err) {
+      console.warn('[lesson] #lesson-export is not valid JSON:', err);
+      return {};
+    }
+  };
+
+  const config = readConfig();
+  const states = Array.isArray(config.states) && config.states.length ? config.states : ['before', 'after'];
+  const labels = config.labels || {};
+  const labelFor = (name) => labels[name] || name.charAt(0).toUpperCase() + name.slice(1);
+  // "crossfade": the frame's smooth 300ms change. "lesson": the lesson's own CSS animation or transition
+  // is the point (motion and hover lessons), so the frame stays out of the way.
+  const transition = config.transition === 'lesson' ? 'lesson' : 'crossfade';
+  const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
+
+  const toggles = document.querySelectorAll('[data-toggle]');
+  const hoverTargets = document.querySelectorAll('[data-hover-target]');
+  const stateLabel = document.querySelector('[data-state-label]');
+
+  document.querySelectorAll('[data-morph]').forEach((el, i) => {
+    el.style.viewTransitionName = `ds-morph-${i + 1}`;
+  });
+
+  function apply(name) {
+    if (!states.includes(name)) {
+      throw new Error(`[lesson] Unknown state "${name}". Use one of: ${states.join(', ')}`);
+    }
+    root.dataset.state = name;
+    if (stateLabel) stateLabel.textContent = labelFor(name);
+    toggles.forEach((button) => button.setAttribute('aria-pressed', String(states.indexOf(name) > 0)));
+  }
+
+  // Switch with no transitions. Reading offsetWidth applies the new styles while transitions are off.
+  function applyInstantly(name) {
+    root.classList.add('ds-instant');
+    apply(name);
+    void root.offsetWidth;
+    root.classList.remove('ds-instant');
+  }
+
+  function replay() {
+    root.classList.remove('ds-playing');
+    void root.offsetWidth;
+    root.classList.add('ds-playing');
+  }
+
+  // Resolves once the change is animating, so the exporter can step through it frame by frame
+  function transitionTo(name) {
+    if (name === root.dataset.state) return Promise.resolve();
+    if (transition === 'lesson') {
+      apply(name);
+      replay();
+      return Promise.resolve();
+    }
+    if (!document.startViewTransition || reducedMotion.matches) {
+      applyInstantly(name);
+      return Promise.resolve();
+    }
+    return document.startViewTransition(() => applyInstantly(name)).ready.catch(() => {});
+  }
+
+  const nextState = () => states[(states.indexOf(root.dataset.state) + 1) % states.length];
+
+  toggles.forEach((button) => button.addEventListener('click', () => transitionTo(nextState())));
+  document.querySelectorAll('[data-play]').forEach((button) => button.addEventListener('click', replay));
+
+  let lastPointer = 'mouse';
+  hoverTargets.forEach((el) => {
+    const hoverState = states.includes(el.dataset.hoverTarget) ? el.dataset.hoverTarget : states.at(-1);
+    el.addEventListener('pointerdown', (event) => { lastPointer = event.pointerType; });
+    el.addEventListener('pointerenter', (event) => { if (event.pointerType !== 'touch') transitionTo(hoverState); });
+    el.addEventListener('pointerleave', (event) => { if (event.pointerType !== 'touch') transitionTo(states[0]); });
+    el.addEventListener('click', () => {
+      if (lastPointer === 'touch') transitionTo(root.dataset.state === hoverState ? states[0] : hoverState);
+    });
+    el.addEventListener('focus', () => { if (el.matches(':focus-visible')) transitionTo(hoverState); });
+    el.addEventListener('blur', () => transitionTo(states[0]));
+  });
+
+  const requested = new URLSearchParams(location.search).get('state');
+  applyInstantly(states.includes(requested) ? requested : states[0]);
+  root.classList.add('ds-playing');
+
+  window.lesson = {
+    states: [...states],
+    transition,
+    setState: applyInstantly,
+    getState: () => root.dataset.state,
+    transitionTo,
+    replay,
+  };
+
+  // Tell the lesson page how tall the demo is, so the iframe never shows a scrollbar.
+  // .ds-embedded hides overflow: a scrollbar would narrow the demo, change its height and loop.
+  const embedded = window.parent !== window;
+  root.classList.toggle('ds-embedded', embedded);
+  const demo = document.querySelector('[data-demo]') || document.body;
+  const reportHeight = () => {
+    if (!embedded) return;
+    window.parent.postMessage(
+      { type: 'designspo:height', height: Math.ceil(demo.getBoundingClientRect().height) },
+      '*'
+    );
+  };
+  new ResizeObserver(reportHeight).observe(demo);
+  window.addEventListener('load', reportHeight);
+  document.fonts?.ready.then(reportHeight);
+})();
+/* runtime:end */
+</script>
+</body>
+</html>
