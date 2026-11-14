@@ -8,8 +8,8 @@ When a page isn’t converting, it’s tempting to add more content instead of c
 
 But often the problem is friction, meaning anything that makes the next step harder than it needs to be.
 
-Slow pages from heavy content, long forms, complicated layouts, etc. can lose more conversions than they gain. So it's important to view these as obstacles and test how your site converts without them.
+Slow pages from heavy content, long forms, complicated layouts, etc. can lose more conversions than they gain. So it’s important to view these as obstacles and test how your site converts without them.
 
-Run A/B tests with a short form and a long form. Run tests with one CTA vs two. Then, once you've removed as much friction as possible, strategically add it back in to get higher quality conversions.
+Run A/B tests with a short form and a long form. Run tests with one CTA vs two. Then, once you’ve removed as much friction as possible, strategically add it back in to get higher quality conversions.
 
-Perhaps a single "Free Trial" button gets more users, but a short signup form gets higher paying users. This is an ongoing balancing between friction and conversion rates. Conversion will always be higher without friction, but high-quality customers might come from adding a little bit of friction back in.
+Perhaps a single “Free Trial” button gets more users, but a short signup form gets higher paying users. This is an ongoing balancing between friction and conversion rates. Conversion will always be higher without friction, but high-quality customers might come from adding a little bit of friction back in.

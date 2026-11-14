@@ -6,4 +6,4 @@ alt: A blog card styled with the tokens bg-surface and text-primary. In light mo
 
 Dark mode is much easier to build when your components use semantic tokens. A semantic token is named for its job, like `text-primary` or `bg-surface`, and it points to an actual color, like a dark navy or a light gray.
 
-With tokens like these, changing a design to dark mode mostly means changing what each tokens points to. For example, `bg-surface` might be a very light gray in light mode and a very dark gray in dark mode, while every card and section that uses it stays exactly the same. Hardcoded colors, on the other hand, tend to make dark mode hard to add later, since each one has to be found and changed by hand.
+With tokens like these, changing a design to dark mode mostly means changing what each token points to. For example, `bg-surface` might be a very light gray in light mode and a very dark gray in dark mode, while every card and section that uses it stays exactly the same. Hardcoded colors, on the other hand, tend to make dark mode hard to add later, since each one has to be found and changed by hand.

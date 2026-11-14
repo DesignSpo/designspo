@@ -1,7 +1,7 @@
 ---
 title: Add hover states only to things you can click
 category: Interaction
-alt: Two cards side by side, labeled No hover and Hover. Our values isn't a link, so it stays still under the cursor. Case study links to a story, so it lifts when the cursor moves onto it.
+alt: Two cards side by side, labeled No hover and Hover. Our values isn’t a link, so it stays still under the cursor. Case study links to a story, so it lifts when the cursor moves onto it.
 examples:
   - name: George Wert
     url: https://georgewert.com

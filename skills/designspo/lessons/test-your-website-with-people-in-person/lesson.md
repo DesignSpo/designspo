@@ -1,7 +1,7 @@
 ---
 title: Test your website with people in person
 category: Conversion
-alt: Two ways to find what's wrong with a new website. Before, a month of site analytics: 1,000 visitors, a 61% bounce rate, 84 pricing page views, 9 sign-ups and 52 seconds average time, with no sign of why. After, notes from watching five people try to find out what it costs: four get stuck on a See pricing button that does nothing, and one finds the prices in the footer.
+alt: Two ways to find what’s wrong with a new website. Before, a month of site analytics: 1,000 visitors, a 61% bounce rate, 84 pricing page views, 9 sign-ups and 52 seconds average time, with no sign of why. After, notes from watching five people try to find out what it costs: four get stuck on a See pricing button that does nothing, and one finds the prices in the footer.
 ---
 
 When you launch your website, you might be tempted to install analytics software and try to get a lot of data before improving the design.

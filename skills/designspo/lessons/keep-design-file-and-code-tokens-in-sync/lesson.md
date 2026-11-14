@@ -1,7 +1,7 @@
 ---
 title: Keep design file and code tokens in sync
 category: Design Systems
-alt: Figma and CSS token lists side by side, with a line joining each pair. Before, they have drifted far apart: Figma's brand-500 and brand-hover are blue but the CSS still has orange for both, and bg-surface is still called --surface in the CSS, so three of the four pairs are marked as not matching. After, the CSS was updated to match, and all four names and colors are the same in both.
+alt: Figma and CSS token lists side by side, with a line joining each pair. Before, they have drifted far apart: Figma’s brand-500 and brand-hover are blue but the CSS still has orange for both, and bg-surface is still called --surface in the CSS, so three of the four pairs are marked as not matching. After, the CSS was updated to match, and all four names and colors are the same in both.
 ---
 
 Many designers keep tokens in two places: as variables in a design tool like Figma, and as CSS variables on the live site. If the two drift apart, designs will stop matching what actually gets built. A color renamed in Figma but not in the CSS, for example, can lead to guesswork and small mismatches.

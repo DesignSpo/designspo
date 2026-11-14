@@ -6,4 +6,4 @@ alt: Three questions prospects ask on sales calls, Is it secure?, How long is se
 
 Your sales and support teams hear every objection prospects have. They know which questions come up before a purchase, and which worries make people walk away. We add answers to these objections to our sales scripts but that knowledge often never makes it onto the website.
 
-Ask them for the top five questions and objections they hear, then answer each one on the page where it comes up. Security worries might belong near the signup form and questions about setup time might fit on the pricing page. It's info you likely already have on hand, and it can help the page do some of the work your team does on calls.
+Ask them for the top five questions and objections they hear, then answer each one on the page where it comes up. Security worries might belong near the signup form and questions about setup time might fit on the pricing page. It’s info you likely already have on hand, and it can help the page do some of the work your team does on calls.

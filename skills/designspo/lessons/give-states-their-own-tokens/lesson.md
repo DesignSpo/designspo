@@ -1,7 +1,7 @@
 ---
 title: Give states their own tokens
 category: Design Systems
-alt: Three brand buttons, Sign up, Subscribe and Buy now, in their default, hover and disabled states. Before, only the default state has a token, and each button's hover and disabled colors were picked by eye, so they all differ. After, the tokens bg-brand_hover and bg-brand_disabled give every button the same hover and disabled colors.
+alt: Three brand buttons, Sign up, Subscribe and Buy now, in their default, hover and disabled states. Before, only the default state has a token, and each button’s hover and disabled colors were picked by eye, so they all differ. After, the tokens bg-brand_hover and bg-brand_disabled give every button the same hover and disabled colors.
 ---
 
 Buttons, links and inputs change when people interact with them. They have hover, active, disabled and error states, and each of those needs colors too. If you pick those colors by eye every time, every component can end up with a slightly different hover shade.
