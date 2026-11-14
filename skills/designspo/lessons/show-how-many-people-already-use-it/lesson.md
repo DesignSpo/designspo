@@ -4,7 +4,7 @@ category: Conversion
 alt: The top of a website for ACME, dental booking software, with a nav and the headline Fill every chair, every day above a Book a demo button. Before, nothing sits under the button. After, one line under it reads Used by 3,000 dental clinics, with the number in bold.
 ---
 
-Building trust close to CTAs is one the main ways to increase your conversion rates.
+Building trust close to CTAs is one of the main ways to increase your conversion rates.
 
 A simple bit of text like “used by 3,000 dentists” or “trusted by 50+ startups in SF” is a quick form of social proof that shows that people already trust you. It can fit right under a headline, a button, or a contact form and it’s close in proximity to the CTA so it won’t get ignored.
 
